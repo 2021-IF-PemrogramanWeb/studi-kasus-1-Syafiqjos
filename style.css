@@ -1,0 +1,25 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.content-center {
+    place-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    max-width: 600px;
+    padding: 20px;
+}
+
+.min-height {
+    min-height: 100vh;
+}
+
+.text-center {
+    text-align: center;
+}
