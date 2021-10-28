@@ -55,6 +55,7 @@
                     </li>
                 </ul>
                 <form class="d-flex" method="POST" action="./logout.php">
+                    <span class="m-2"><?php echo($email); ?></span>
                     <button class="btn btn-outline-danger" type="submit">Logout</button>
                 </form>
             </div>
