@@ -1,3 +1,35 @@
+<?php
+    include('./DatabaseController.php');
+    include('./UserController.php');
+    include('./BankController.php');
+
+    if (isset($_COOKIE['email']) && isset($_COOKIE['pass'])){
+        $db = connectDb();
+
+        $email = $_COOKIE['email'];
+        $pass = $_COOKIE['pass'];
+
+        $login = checkLogin($db, $email, $pass);
+        $status = $login['status'];
+        $user = $login['data'];
+
+        $bankData = null;
+
+        if ($status == 0) {
+            // if login successfully
+            $bankData = getBankData($db, $user['id']);
+        } else {
+            header("Location: /");
+            exit();
+        }
+
+        closeDb($db);
+    } else {
+        header("Location: /");
+        exit();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,6 +54,7 @@
                     </li>
                 </ul>
                 <form class="d-flex" method="POST" action="./logout.php">
+                    <span class="m-2">kadal@gmail.com</span>
                     <button class="btn btn-outline-danger" type="submit">Logout</button>
                 </form>
             </div>
@@ -33,7 +66,7 @@
             <p>Here goes your bank history.</p>
         </div>
         <div>
-            <h3 class="display-6">Add New Data</h3>
+            <h3 class="display-6 mt-2">Add New Data</h3>
             <form class="container-fluid" action="./add-data.php">
                 <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
@@ -51,40 +84,36 @@
             </form>
         </div>
         <div>
-            <h3 class="display-6">Table Preview</h3>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>No.</th>
-                        <th>Description</th>
-                        <th>Value</th>
-                        <th>Date</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1.</td>
-                        <td>Hanya sebuah deskripsi.</td>
-                        <td>+1000</td>
-                        <td>10 January 2021</td>
-                        <td>
-                            <form><button class="btn btn-warning mr-3">Edit</button>
-                            <button class="btn btn-danger">Delete</button></form>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2.</td>
-                        <td>Hanya sebuah deskripsi.</td>
-                        <td>-1000</td>
-                        <td>11 January 2021</td>
-                        <td>
-                            <form><button class="btn btn-warning mr-3">Edit</button>
-                            <button class="btn btn-danger">Delete</button></form>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <h3 class="display-6 mt-2">Table Preview</h3>
+            <?php if (count($bankData) > 0) { ?>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Description</th>
+                            <th>Value</th>
+                            <th>Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $i = 0; foreach ($bankData as $row) { $i++; ?>
+                            <tr>
+                                <td><?php echo($i); ?>.</td>
+                                <td><?php echo($row['description']); ?></td>
+                                <td><?php echo($row['value']); ?></td>
+                                <td><?php echo(date_format(date_create($row['date']), "d/m/Y")); ?></td>
+                                <td>
+                                    <form><button class="btn btn-warning mr-3">Edit</button>
+                                    <button class="btn btn-danger">Delete</button></form>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            <?php } else { ?>
+                <div class="mt-4 mb-4 h6 text-center">No Data</div>
+            <?php } ?>
         </div>
     </main>
 </body>
