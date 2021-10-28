@@ -68,7 +68,7 @@
         </div>
         <div>
             <h3 class="display-6 mt-2">Add New Data</h3>
-            <form class="container-fluid" action="./add-data.php">
+            <form class="container-fluid" action="./addBankData.php" method="POST">
                 <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
                     <input type="description" name="description" class="form-control" />
