@@ -12,4 +12,12 @@
 
         return null;
     }
+
+    function addBankData($db, $user_id, $data){
+        $desc = $data['description'];
+        $val = $data['value'];
+        $date = $data['date'];
+
+        $res = $db->query("INSERT INTO banks(user_id, description, value, date) VALUES ('$user_id','$desc','$val','$date')");
+    }
 ?>
