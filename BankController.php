@@ -20,4 +20,10 @@
 
         $res = $db->query("INSERT INTO banks(user_id, description, value, date) VALUES ('$user_id','$desc','$val','$date')");
     }
+
+    function deleteBankData($db, $user_id, $data) {
+        $id = $data['id'];
+
+        $res = $db->query("DELETE FROM banks WHERE user_id = $user_id AND id = $id;");
+    }
 ?>
