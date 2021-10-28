@@ -1,3 +1,35 @@
+<?php
+    include('./DatabaseController.php');
+    include('./UserController.php');
+    include('./BankController.php');
+
+    if (isset($_COOKIE['email']) && isset($_COOKIE['pass'])){
+        $db = connectDb();
+
+        $email = $_COOKIE['email'];
+        $pass = $_COOKIE['pass'];
+
+        $login = checkLogin($db, $email, $pass);
+        $status = $login['status'];
+        $user = $login['data'];
+
+        $bankData = null;
+
+        if ($status == 0) {
+            // if login successfully
+            $bankData = getBankData($db, $user['id']);
+        } else {
+            header("Location: /");
+            exit();
+        }
+
+        closeDb($db);
+    } else {
+        header("Location: /");
+        exit();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,7 +66,7 @@
             <p>Here goes your bank history.</p>
         </div>
         <div>
-            <h3 class="display-6">Add New Data</h3>
+            <h3 class="display-6 mt-2">Add New Data</h3>
             <form class="container-fluid" action="./add-data.php">
                 <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
@@ -52,15 +84,18 @@
             </form>
         </div>
         <div>
-            <h3 class="display-6">Graph Preview</h3>
+            <h3 class="display-6 mt-2">Graph Preview</h3>
             <canvas id="graph-preview"></canvas>
         </div>
     </main>
     <script>
         const labels = [
             'Begin',
-            '10/01/2021',
-            '11/01/2021'
+            <?php $c = count($bankData); for ($i = 0; $i < $c; $i++) {
+                $row = $bankData[$i];
+                $truncatedDate = date_format(date_create($row['date']), "d/m/Y");
+                echo("'$truncatedDate',");
+            } ?>
         ];
 
         const data = {
@@ -69,7 +104,13 @@
                 label: 'Deposit',
                 backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
-                data: [0, 1000, 0],
+                data: [
+                    0, 
+                    <?php $c = count($bankData); for ($i = 0; $i < $c; $i++) {
+                        $val = $bankData[$i]['value'];
+                        echo("$val,");
+                    } ?>
+                ],
             }]
         };
 
