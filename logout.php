@@ -3,7 +3,8 @@
     include('./DatabaseController.php');
     include('./UserController.php');
 
-    $db = connectDb();
-    logout($db);
-
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $db = connectDb();
+        logout($db);
+    }
 ?>
