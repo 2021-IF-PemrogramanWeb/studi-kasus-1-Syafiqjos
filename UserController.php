@@ -35,4 +35,11 @@
             "data" => null
         );
     }
+
+    function logout($db) {
+        setcookie('email', null);
+        setcookie('pass', null);
+
+        header('Location: /');
+    }
 ?>
