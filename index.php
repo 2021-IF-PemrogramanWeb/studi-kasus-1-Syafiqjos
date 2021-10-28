@@ -10,7 +10,7 @@
             $email = $_POST['email'];
             $pass = $_POST['password'];
 
-            $status = checkLogin($db, $email, $pass);
+            $status = checkLogin($db, $email, $pass)['status'];
 
             closeDb($db);
 

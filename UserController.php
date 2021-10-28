@@ -25,17 +25,33 @@
                 $row = $res->fetch_row();
                 if ($row[2] == $password) {
                     // password same
-                    return 0;
+                    return array(
+                        "status" => 0,
+                        "data" => array(
+                            "id" => $row[0],
+                            "email" => $row[1],
+                            "password" => $row[2]
+                        )
+                    );
                 } else {
-                    return 2;
+                    return array(
+                        "status" => 2,
+                        "data" => null
+                    );
                 }
             }
 
             $res->free_result();
             
-            return 1;
+            return array(
+                "status" => 1,
+                "data" => null
+            );
         }
 
-        return -1;
+        return array(
+            "status" => -1,
+            "data" => null
+        );
     }
 ?>
