@@ -50,12 +50,17 @@
 
             $status = checkLogin($db, $email, $pass);
 
+            closeDb($db);
+
             if ($status == 0) {
                 // success
                 $errorMessage = null;
 
                 setcookie("email", $email);
                 setcookie("pass", $pass);
+
+                // Redirect into login
+                header("Location: /dashboard-table.php");
             } 
             else if ($status == 1) {
                 // email not found
