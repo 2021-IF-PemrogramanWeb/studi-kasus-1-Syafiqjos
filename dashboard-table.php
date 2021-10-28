@@ -1,7 +1,7 @@
 <?php
-    include('./DatabaseController.php');
-    include('./UserController.php');
-    include('./BankController.php');
+    include('./Controllers/DatabaseController.php');
+    include('./Controllers/UserController.php');
+    include('./Controllers/BankController.php');
 
     if (isset($_COOKIE['email']) && isset($_COOKIE['pass'])){
         $db = connectDb();
@@ -53,7 +53,7 @@
                         <a class="nav-link" href="/dashboard-graph.php">Graph</a>
                     </li>
                 </ul>
-                <form class="d-flex" method="POST" action="./logout.php">
+                <form class="d-flex" method="POST" action="./actions/logout.php">
                     <span class="m-2"><?php echo($email); ?></span>
                     <button class="btn btn-outline-danger" type="submit">Logout</button>
                 </form>
@@ -67,7 +67,7 @@
         </div>
         <div>
             <h3 class="display-6 mt-2">Add New Data</h3>
-            <form class="container-fluid" action="./addBankdata.php" method="POST">
+            <form class="container-fluid" action="./actions/addBankdata.php" method="POST">
                 <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
                     <input type="description" name="description" class="form-control" />
@@ -104,7 +104,7 @@
                                 <td><?php echo($row['value']); ?></td>
                                 <td><?php echo(date_format(date_create($row['date']), "d/m/Y")); ?></td>
                                 <td>
-                                    <form action="./deleteBankData.php" method="POST">
+                                    <form action="./actions/deleteBankData.php" method="POST">
                                     <input type="hidden" name="id" value="<?php echo($row['id']); ?>" />
                                         <button class="btn btn-danger">Delete</button>
                                     </form>

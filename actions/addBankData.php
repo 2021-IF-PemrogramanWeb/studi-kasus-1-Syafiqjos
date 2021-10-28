@@ -1,16 +1,18 @@
 <?php
 
-    include('./DatabaseController.php');
-    include('./UserController.php');
-    include('./BankController.php');
+    include('../Controllers/DatabaseController.php');
+    include('../Controllers/UserController.php');
+    include('../Controllers/BankController.php');
 
     function getSendedBankData() {
-        if (isset($_POST['id'])) {
-            if (!empty($_POST['id'])) {
+        if (isset($_POST['description']) && isset($_POST['value']) && isset($_POST['date'])) {
+            if (!empty($_POST['description']) && !empty($_POST['value']) && !empty($_POST['date'])) {
                 return array(
                     "status" => 0,
                     "data" => array(
-                        "id" => $_POST['id'],
+                        "description" => $_POST['description'],
+                        "value" => $_POST['value'],
+                        "date" => $_POST['date']
                     )
                 );
             }
@@ -38,7 +40,7 @@
             $bankStatus = getSendedBankData();
             if ($bankStatus['status'] == 0) {
                 $bankData = $bankStatus['data'];
-                deleteBankData($db, $user['id'], $bankData);
+                addBankData($db, $user['id'], $bankData);
             } else {
                 // error
             }
