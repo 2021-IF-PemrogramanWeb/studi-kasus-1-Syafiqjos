@@ -42,7 +42,7 @@
             return -1;
         }
 
-        if (!empty($_POST['email']) && !empty($_POST['password'])) {
+        if (isset($_POST['email']) && isset($_POST['password'])) {
             $db = connectDb();
 
             $email = $_POST['email'];
