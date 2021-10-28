@@ -48,10 +48,10 @@
                 <a class="navbar-brand" href="#">Bank PWEB</a>
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Table</a>
+                        <a class="nav-link" href="/dashboard-table.php">Table</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Graph</a>
+                        <a class="nav-link active" href="/dashboard-graph.php">Graph</a>
                     </li>
                 </ul>
                 <form class="d-flex" method="POST" action="./logout.php">
