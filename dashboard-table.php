@@ -104,8 +104,10 @@
                                 <td><?php echo($row['value']); ?></td>
                                 <td><?php echo(date_format(date_create($row['date']), "d/m/Y")); ?></td>
                                 <td>
-                                    <form><button class="btn btn-warning mr-3">Edit</button>
-                                    <button class="btn btn-danger">Delete</button></form>
+                                    <form action="./deleteBankData.php" method="POST">
+                                    <input type="hidden" name="id" value="<?php echo($row['id']); ?>" />
+                                        <button class="btn btn-danger">Delete</button>
+                                    </form>
                                 </td>
                             </tr>
                         <?php } ?>
