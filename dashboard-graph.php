@@ -107,9 +107,10 @@
                 borderColor: 'rgb(255, 99, 132)',
                 data: [
                     0, 
-                    <?php $c = count($bankData); for ($i = 0; $i < $c; $i++) {
+                    <?php $c = count($bankData); $acc = 0; for ($i = 0; $i < $c; $i++) {
                         $val = $bankData[$i]['value'];
-                        echo("$val,");
+                        $acc += $val;
+                        echo("$acc,");
                     } ?>
                 ],
             }]
