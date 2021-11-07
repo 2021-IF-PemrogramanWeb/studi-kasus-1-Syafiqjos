@@ -19,8 +19,8 @@
                 // success
                 $errorMessage = null;
 
-                setcookie("email", $email);
-                setcookie("pass", $pass);
+                setcookie("email", $email, 0, '/');
+                setcookie("pass", $pass, 0, '/');
 
                 // Redirect into login
                 header("Location: /dashboard-table.php");

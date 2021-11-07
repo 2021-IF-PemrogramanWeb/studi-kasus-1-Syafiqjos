@@ -76,8 +76,8 @@
     }
 
     function logout($db) {
-        setcookie('email', null);
-        setcookie('pass', null);
+        setcookie('email', '', 1, '/');
+        setcookie('pass', '', 1, '/');
 
         header('Location: /');
     }
