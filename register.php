@@ -78,6 +78,9 @@
             <input type="password" name="password_conf" class="form-control" />
             <div class="form-text">Input your password once more.</div>
         </div>
+        <div class="mb-3">
+            <span class="form-text">Already have an account? <a href="/">Login</a> here.</span>
+        </div>
         <input type="submit" class="form-control" />
     </form>
 </body>

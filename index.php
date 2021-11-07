@@ -69,6 +69,9 @@
             <input type="password" name="password" class="form-control" />
             <div class="form-text">Input your password.</div>
         </div>
+        <div class="mb-3">
+            <span class="form-text">Do not have account? <a href="/register.php">Register</a> here.</span>
+        </div>
         <input type="submit" class="form-control" />
     </form>
 </body>
