@@ -42,6 +42,24 @@
         } else {
             $errorMessage = "Please enter valid email and password!";
         }
+    } else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+        if (isset($_COOKIE['email']) && isset($_COOKIE['pass'])){
+            $db = connectDb();
+
+            $email = $_COOKIE['email'];
+            $pass = $_COOKIE['pass'];
+    
+            $login = checkLogin($db, $email, $pass);
+            $status = $login['status'];
+            $user = $login['data'];
+            
+            closeDb($db);
+            
+            if ($status == 0) {
+                // already login
+                header('Location: /dashboard-table.php');
+            }
+        }
     }
 ?>
 <!DOCTYPE html>
