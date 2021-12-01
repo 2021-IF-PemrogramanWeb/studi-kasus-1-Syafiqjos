@@ -36,6 +36,10 @@
             else if ($status == 2) {
                 // wrong password
                 $errorMessage = "Password confirmation don't match!";
+            }
+            else if ($status == 3) {
+                // email not valid
+                $errorMessage = "Please use a valid email address!";
             } else {
                 $errorMessage = "Unknown error, please try again!";
             }
