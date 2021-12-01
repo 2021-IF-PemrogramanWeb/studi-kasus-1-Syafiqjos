@@ -92,11 +92,16 @@
     <script>
         const labels = [
             'Begin',
-            <?php $c = count($bankData); for ($i = 0; $i < $c; $i++) {
-                $row = $bankData[$i];
-                $truncatedDate = date_format(date_create($row['date']), "d/m/Y");
-                echo("'$truncatedDate',");
-            } ?>
+            <?php 
+                if ($bankData != null) {
+                    $c = count($bankData); 
+                    for ($i = 0; $i < $c; $i++) {
+                        $row = $bankData[$i];
+                        $truncatedDate = date_format(date_create($row['date']), "d/m/Y");
+                        echo("'$truncatedDate',");
+                    }
+                } 
+            ?>
         ];
 
         const data = {
@@ -107,11 +112,17 @@
                 borderColor: 'rgb(255, 99, 132)',
                 data: [
                     0, 
-                    <?php $c = count($bankData); $acc = 0; for ($i = 0; $i < $c; $i++) {
-                        $val = $bankData[$i]['value'];
-                        $acc += $val;
-                        echo("$acc,");
-                    } ?>
+                    <?php 
+                        if ($bankData != null) {
+                            $c = count($bankData);
+                            $acc = 0;
+                            for ($i = 0; $i < $c; $i++) {
+                                $val = $bankData[$i]['value'];
+                                $acc += $val;
+                                echo("$acc,");
+                            }
+                        }
+                    ?>
                 ],
             }]
         };

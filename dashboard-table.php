@@ -85,7 +85,7 @@
         </div>
         <div>
             <h3 class="display-6 mt-2">Table Preview</h3>
-            <?php if (count($bankData) > 0) { ?>
+            <?php if ($bankData != null && count($bankData) > 0) { ?>
                 <table class="table">
                     <thead>
                         <tr>
