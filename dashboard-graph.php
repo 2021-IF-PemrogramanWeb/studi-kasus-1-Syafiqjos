@@ -2,6 +2,7 @@
     include('./Controllers/DatabaseController.php');
     include('./Controllers/UserController.php');
     include('./Controllers/BankController.php');
+    include('./Controllers/helper.php');
 
     if (isset($_COOKIE['email']) && isset($_COOKIE['pass'])){
         $db = connectDb();
@@ -55,7 +56,7 @@
                     </li>
                 </ul>
                 <form class="d-flex" method="POST" action="./actions/logout.php">
-                    <span class="m-2"><?php echo($email); ?></span>
+                    <span class="m-2"><?php echo(normalize_html($email)); ?></span>
                     <button class="btn btn-outline-danger" type="submit">Logout</button>
                 </form>
             </div>

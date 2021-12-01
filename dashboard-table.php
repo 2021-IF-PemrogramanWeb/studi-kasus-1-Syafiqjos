@@ -2,6 +2,7 @@
     include('./Controllers/DatabaseController.php');
     include('./Controllers/UserController.php');
     include('./Controllers/BankController.php');
+    include('./Controllers/helper.php');
 
     if (isset($_COOKIE['email']) && isset($_COOKIE['pass'])){
         $db = connectDb();
@@ -54,7 +55,7 @@
                     </li>
                 </ul>
                 <form class="d-flex" method="POST" action="./actions/logout.php">
-                    <span class="m-2"><?php echo($email); ?></span>
+                    <span class="m-2"><?php echo(normalize_html($email)); ?></span>
                     <button class="btn btn-outline-danger" type="submit">Logout</button>
                 </form>
             </div>
@@ -99,13 +100,13 @@
                     <tbody>
                         <?php $i = 0; foreach ($bankData as $row) { $i++; ?>
                             <tr>
-                                <td><?php echo($i); ?>.</td>
-                                <td><?php echo($row['description']); ?></td>
-                                <td><?php echo($row['value']); ?></td>
-                                <td><?php echo(date_format(date_create($row['date']), "d/m/Y")); ?></td>
+                                <td><?php echo(normalize_html($i)); ?>.</td>
+                                <td><?php echo(normalize_html($row['description'])); ?></td>
+                                <td><?php echo(normalize_html($row['value'])); ?></td>
+                                <td><?php echo(normalize_html(date_format(date_create($row['date']), "d/m/Y"))); ?></td>
                                 <td>
                                     <form action="./actions/deleteBankData.php" method="POST">
-                                    <input type="hidden" name="id" value="<?php echo($row['id']); ?>" />
+                                    <input type="hidden" name="id" value="<?php echo(normalize_html($row['id'])); ?>" />
                                         <button class="btn btn-danger">Delete</button>
                                     </form>
                                 </td>
